@@ -2,9 +2,14 @@
 
 namespace Database\Seeders;
 
+use App\Models\Participation;
+use App\Models\Project;
+use App\Models\Task;
+use App\Models\TaskStatus;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -19,5 +24,9 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+
+        TaskStatus::create(['status' => 'Not Started']);
+        TaskStatus::create(['status' => 'In Progress']);
+        TaskStatus::create(['status' => 'Completed']);
     }
 }
