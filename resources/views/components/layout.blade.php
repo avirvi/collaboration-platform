@@ -10,7 +10,7 @@
 
 <body>
     <main class="container">
-        <a href="#">Dashboard</a>
+        <x-navbar/>
         {{ $slot }}
     </main>
 </body>

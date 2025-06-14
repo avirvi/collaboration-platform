@@ -2,7 +2,7 @@
     <x-slot name="title">
         User Dashboard
     </x-slot>
-    <h1 class="mb-4">Hello, User!</h1>
+    <h1 class="mb-4">Hello, {{ auth()->user()->username }}!</h1>
     <table class="table table-bordered caption-top">
         <caption>
             Your tasks
