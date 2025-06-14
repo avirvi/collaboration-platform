@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -54,5 +55,20 @@ class User extends Authenticatable
     public function isRegularUser()
     {
         return $this->role === 'user';
+    }
+
+    public function isModerator(Project $project)
+    {
+        return ('moderator' === (DB::table('participations')->where('project_id', '=', $project->id, 'and', 'user_id', '=', $this->id))->value('user_project_role'));
+    }
+
+    public function isParticipant(Project $project)
+    {
+        return ('participant' === (DB::table('participations')->where('project_id', '=', $project->id, 'and', 'user_id', '=', $this->id))->value('user_project_role'));
+    }
+
+    public function isResponsible(Task $task)
+    {
+        return ($this->id === $task->responsible_person);
     }
 }

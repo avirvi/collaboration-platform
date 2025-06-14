@@ -2,27 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Participation;
 use Illuminate\Http\Request;
-use App\Models\Project;
-use App\Models\Task;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
-class DashboardController extends Controller
+class TaskController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $projects = DB::table('projects')->leftJoin('participations', function($join) {
-            $join->on('projects.id', 'participations.project_id');
-        })->where('participations.user_id', Auth::id())->get();
-
-        $tasks = Task::where('responsible_person', '=', Auth::id());
-
-        return view('dashboard', compact('tasks', 'projects'));
+        //
     }
 
     /**

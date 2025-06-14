@@ -39,18 +39,19 @@
         @else
             <tr>
                 <td colspan="4">
-                    There are no tasks. Enjoy your free time!
+                    There are no tasks.
                 </td>
             </tr>
         @endif
     </table>
 
     <br>
+    <h6 class="text-muted">Your projects</h6>
     @if ($projects->count())
         <div class="row">
             @foreach ($projects as $project)
                 <div class="col-md-6 col-lg-4">
-                    <x-project-card :project="$project" />
+                    <x-project-card :project='$project' />
                 </div>
             @endforeach
         </div>
