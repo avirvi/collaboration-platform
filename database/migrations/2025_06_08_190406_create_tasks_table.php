@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('title', 100);
-            $table->dateTime('deadline', 0);
+            $table->date('deadline');
             $table->foreignId('status_id')->constrained('task_statuses')->onDelete('cascade');
             $table->foreignId('responsible_person')->nullable()->constrained('users')->onDelete('cascade');
             $table->foreignId('project_id')->constrained('projects')->onDelete('cascade');

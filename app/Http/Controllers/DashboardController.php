@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Participation;
 use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Models\Task;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Models\Participation;
 
 class DashboardController extends Controller
 {
@@ -16,14 +16,18 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $projects = DB::table('projects')
-        ->leftJoin('participations', function($join) {
-            $join->on('projects.id', 'participations.project_id');
-        })
-        ->where('participations.user_id', Auth::id())
-        ->get();
+        if (Auth::user()->isAdmin()) {
+            $projects = Project::all();
+            $tasks = Task::all();
+        } else {
+            $projects = Participation::with('project')
+                ->where('user_id', Auth::id())
+                ->get()
+                ->pluck('project');
 
-        $tasks = Task::where('responsible_person', Auth::id())->get();
+
+            $tasks = Task::where('responsible_person', Auth::id())->get();
+        }
 
         return view('dashboard', compact('tasks', 'projects'));
     }

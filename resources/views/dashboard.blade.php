@@ -54,7 +54,7 @@
         <div class="row">
             @foreach ($projects as $project)
                 <div class="col-md-6 col-lg-4">
-                    <x-project-card :project='$project' />
+                    <x-project-card :project="$project" />
                 </div>
             @endforeach
         </div>

@@ -77,7 +77,7 @@ class TaskController extends Controller
      */
     public function edit(Request $request, Project $project, Task $task)
     {
-        if ($request->user()->cannot('update', $project)) {
+        if ($request->user()->cannot('update', $task)) {
             abort(403, 'You are not authorized to edit this task.');
         }
 
@@ -94,7 +94,7 @@ class TaskController extends Controller
      */
     public function update(Request $request, Project $project, Task $task)
     {
-        if ($request->user()->cannot('update', $project)) {
+        if ($request->user()->cannot('update', $task)) {
             abort(403, 'You are not authorized to edit this task.');
         }
 
@@ -121,10 +121,10 @@ class TaskController extends Controller
      */
     public function destroy(Request $request, Project $project, Task $task)
     {
-        if ($request->user()->cannot('delete', $project)) {
-            abort(403, 'You are not authorized to delete this project.');
+        if ($request->user()->cannot('delete', $task)) {
+            abort(403, 'You are not authorized to delete this task.');
         }
         $task->delete();
-        return redirect()->route('projects.show', $project)->with('success', 'Project deleted successfully.');
+        return redirect()->route('projects.show', $project)->with('success', 'Task deleted successfully.');
     }
 }

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Project;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Task;
+use Illuminate\Support\Facades\DB;
 
 class ProjectController extends Controller
 {
@@ -65,7 +66,7 @@ class ProjectController extends Controller
      */
     public function show(Request $request, string $id)
     {
-        $project = Project::find($id);
+        $project = Project::all()->find($id);
 
         if ($request->user()->cannot('view', $project)) {
             abort(403, 'You are not authorized to view this project.');
@@ -73,7 +74,9 @@ class ProjectController extends Controller
 
         $tasks = Task::where('project_id', $id)->get();
 
-        return view('projects.show', compact('project', 'tasks'));
+        $participation = Participation::where('project_id', $project->id)->get();
+
+        return view('projects.show', compact('project', 'tasks', 'participation'));
     }
 
     /**
@@ -119,6 +122,7 @@ class ProjectController extends Controller
         if ($request->user()->cannot('delete', $project)) {
             abort(403, 'You are not authorized to delete this project.');
         }
+        
         $project->delete();
         return redirect()->route('dashboard.index')->with('success', 'Project deleted successfully.');
     }

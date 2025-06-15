@@ -59,12 +59,14 @@ class User extends Authenticatable
 
     public function isModerator(Project $project)
     {
-        return ('moderator' === (DB::table('participations')->where('project_id', '=', $project->id, 'and', 'user_id', '=', $this->id))->value('user_project_role'));
+        $role = DB::table('participations')->where('project_id', $project->id)->where('user_id', $this->id)->value('user_project_role');
+        return $role === 'moderator';
     }
 
     public function isParticipant(Project $project)
     {
-        return ('participant' === (DB::table('participations')->where('project_id', '=', $project->id, 'and', 'user_id', '=', $this->id))->value('user_project_role'));
+        $role = DB::table('participations')->where('project_id', $project->id)->where('user_id', $this->id)->value('user_project_role');
+        return $role === 'participant';
     }
 
     public function isResponsible(Task $task)

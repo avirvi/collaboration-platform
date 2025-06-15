@@ -1,4 +1,7 @@
 <div class="navbar navbar-expand-sm shadow-sm bg-light border sticky-top">
+    @guest
+        <a href="{{ route('home') }}" class="nav-link">Main Page</a>
+    @endguest
     @auth
         <ul class="navbar-nav">
             <li>
