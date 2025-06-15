@@ -1,28 +1,37 @@
 <div class="navbar navbar-expand-sm shadow-sm bg-light border sticky-top">
     @guest
-        <a href="{{ route('home') }}" class="nav-link">Main Page</a>
+        <a href="{{ route('home') }}" class="nav-link">{{__('messages.Main_page')}}</a>
     @endguest
     @auth
         <ul class="navbar-nav">
             <li>
-                <a href="{{ route('dashboard.index') }}" class="nav-link">Dashboard</a>
+                <a href="{{ route('dashboard.index') }}" class="nav-link">{{__('messages.Dashboard')}}</a>
             </li>
 
             @can('create', App\Models\Project::class)
                 <li>
-                    <a href="{{ route('projects.create') }}" class="nav-link">New Project</a>
+                    <a href="{{ route('projects.create') }}" class="nav-link">{{__('messages.New_project')}}</a>
                 </li>
             @endcan
         </ul>
     @endauth
 
+    <ul class="navbar-nav">
+        <li>
+            <a class="nav-link" href="{{ url('lang/lv') }}">LV</a>
+        </li>
+        <li>
+            <a class="nav-link" href="{{ url('lang/en') }}">EN</a>
+        </li>
+    </ul>
+
     <ul class="navbar-nav ms-auto">
         @guest
             <li>
-                <a href="{{ route('login') }}" class="nav-link flex-sm-right">Login</a>
+                <a href="{{ route('login') }}" class="nav-link flex-sm-right">{{__('auth.Login')}}</a>
             </li>
             <li>
-                <a href="{{ route('register') }}" class="nav-link">Register</a>
+                <a href="{{ route('register') }}" class="nav-link">{{__('auth.Register')}}</a>
             </li>
         @endguest
 
@@ -31,7 +40,7 @@
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit" class="btn nav-link bg-transparent">
-                        Logout (Logged in as {{ auth()->user()->username }})
+                        {{__('auth.Logout')}}
                     </button>
                 </form>
             </li>

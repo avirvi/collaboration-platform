@@ -1,24 +1,24 @@
 <x-layout>
     <x-slot name="title">
-        User Dashboard
+        {{__('messages.Dashboard')}}
     </x-slot>
     <h1 class="mb-4">Hello, {{ auth()->user()->username }}!</h1>
     <table class="table table-bordered caption-top">
         <caption>
-            Your tasks
+            {{__('messages.Your_tasks')}}
         </caption>
         <tr>
             <th>
-                Task
+                {{__('messages.Task')}}
             </th>
             <th>
-                Due
+                {{__('messages.Due')}}
             </th>
             <th>
-                Status
+                {{__('messages.Status')}}
             </th>
             <th>
-                Project
+                {{__('messages.Project')}}
             </th>
         </tr>
         <!-- display the user's tasks if there are any, otherwise a corresponding message -->
@@ -42,14 +42,14 @@
         @else
             <tr>
                 <td colspan="4">
-                    There are no tasks.
+                    {{__('messages.No_tasks')}}
                 </td>
             </tr>
         @endif
     </table>
 
     <br>
-    <h6 class="text-muted">Your projects</h6>
+    <h6 class="text-muted">{{__('messages.Your_projects')}}</h6>
     @if ($projects->count())
         <div class="row">
             @foreach ($projects as $project)
@@ -60,7 +60,7 @@
         </div>
     @else
         <p>
-            You don't have any projects.
+            {{__('messages.No_projects')}}
         </p>
     @endif
 

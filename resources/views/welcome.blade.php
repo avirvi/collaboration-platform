@@ -1,7 +1,7 @@
 <x-layout>
     <x-slot name="title">
-        Collaboration Platform
+        {{__('messages.WebTitle')}}
     </x-slot>
-    <h1>Welcome!</h1>
-    <p>This website helps organize your projects and tasks. Register or log in to get started!</p>
+    <h1>{{__('messages.Welcome')}}</h1>
+    <p>{{__('messages.Website_description')}}</p>
 </x-layout>

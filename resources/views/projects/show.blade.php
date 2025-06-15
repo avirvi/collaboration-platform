@@ -10,30 +10,30 @@
             onsubmit="return confirm('Are you sure you want to delete this project?');">
             @csrf
             @method('DELETE')
-            <button type="submit" class="btn btn-danger" style="margin-top: 1em">Delete Project</button>
+            <button type="submit" class="btn btn-danger" style="margin-top: 1em">{{__('messages.Delete_project')}}</button>
         </form>
     @endcan
 
     @can('update', $project)
-        <a href="{{ route('projects.edit', $project) }}" class="btn btn-primary" style="margin-top: 0.5em; margin-bottom: 1em">Edit Project</a>
+        <a href="{{ route('projects.edit', $project) }}" class="btn btn-primary" style="margin-top: 0.5em; margin-bottom: 1em">{{__('messages.Edit_project')}}</a>
     @endcan
 
     <table class="table table-bordered caption-top">
         <caption>
-            Tasks
+            {{__('messages.Tasks')}}
         </caption>
         <tr>
             <th>
-                Task
+                {{__('messages.Task')}}
             </th>
             <th>
-                Deadline
+                {{__('messages.Due')}}
             </th>
             <th>
-                Status
+                {{__('messages.Status')}}
             </th>
             <th>
-                Assigned To
+                {{__('messages.Responsible_person')}}
             </th>
         </tr>
         @if ($tasks->count())
@@ -77,30 +77,30 @@
         @else
             <tr>
                 <td colspan="4">
-                    There are no tasks.
+                    {{__('messages.No_tasks')}}
                 </td>
             </tr>
         @endif
     </table>
 
     @can('create', [App\Models\Task::class, $project])
-        <a href="{{ route('projects.tasks.create', $project) }}" class="btn btn-primary">Add Task</a>
+        <a href="{{ route('projects.tasks.create', $project) }}" class="btn btn-primary">{{__('messages.Add_task')}}</a>
     @endcan
 
     @can('create', [App\Models\Participation::class, $project])
-        <a href="{{ route('projects.participation.create', $project) }}" class="btn btn-primary">Add Participant</a>
+        <a href="{{ route('projects.participation.create', $project) }}" class="btn btn-primary">{{__('messages.Add_participant')}}</a>
     @endcan
 
     <table class="table table-bordered caption-top">
         <caption>
-            Project Participants
+            {{__('messages.Project_participants')}}
         </caption>
         <tr>
             <th>
-                Username
+                {{__('auth.Username')}}
             </th>
             <th>
-                Role
+                {{__('messages.Role')}}
             </th>
         </tr>
         @foreach ($participation as $participant)
