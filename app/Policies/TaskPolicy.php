@@ -45,7 +45,7 @@ class TaskPolicy
      */
     public function update(User $user, Task $task): bool
     {
-        $project = Project::where('id', $task->project_id);
+        $project = $task->project;
         return ($user->isResponsible($task) || $user->isModerator($project));
     }
 
@@ -54,7 +54,7 @@ class TaskPolicy
      */
     public function delete(User $user, Task $task): bool
     {
-        $project = Project::where('id', $task->project_id);
+        $project = $task->project;
         return ($user->isResponsible($task) || $user->isModerator($project));;
     }
 

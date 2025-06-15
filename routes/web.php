@@ -13,7 +13,7 @@ Route::get('/', function () {
 
 Route::resource('dashboard', DashboardController::class)->middleware('auth');
 Route::resource('projects', ProjectController::class)->middleware('auth');
-Route::resource('tasks', TaskController::class)->middleware('auth');
+Route::resource('projects.tasks', TaskController::class)->middleware('auth');
 
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
 Route::get('/login', [LoginController::class, 'show'])->name('login')->middleware('guest');

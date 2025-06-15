@@ -16,11 +16,14 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $projects = DB::table('projects')->leftJoin('participations', function($join) {
+        $projects = DB::table('projects')
+        ->leftJoin('participations', function($join) {
             $join->on('projects.id', 'participations.project_id');
-        })->where('participations.user_id', Auth::id())->get();
+        })
+        ->where('participations.user_id', Auth::id())
+        ->get();
 
-        $tasks = Task::where('responsible_person', '=', Auth::id());
+        $tasks = Task::where('responsible_person', Auth::id())->get();
 
         return view('dashboard', compact('tasks', 'projects'));
     }

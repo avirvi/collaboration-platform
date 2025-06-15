@@ -15,6 +15,9 @@
                 Due
             </th>
             <th>
+                Status
+            </th>
+            <th>
                 Project
             </th>
         </tr>
@@ -29,10 +32,10 @@
                         {{ $task->deadline }}
                     </td>
                     <td>
-                        {{ $task->status_id }}
+                        {{ $task->taskStatus->status }}
                     </td>
                     <td>
-                        {{ $task->project_id }}
+                        {{ $task->project->title }}
                     </td>
                 </tr>
             @endforeach

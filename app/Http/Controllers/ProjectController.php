@@ -66,13 +66,14 @@ class ProjectController extends Controller
     public function show(Request $request, string $id)
     {
         $project = Project::find($id);
-        
+
         if ($request->user()->cannot('view', $project)) {
             abort(403, 'You are not authorized to view this project.');
         }
-        
-        $tasks = Task::where('project_id', $id);
-        return view('projects.show', compact ('project', 'tasks'));
+
+        $tasks = Task::where('project_id', $id)->get();
+
+        return view('projects.show', compact('project', 'tasks'));
     }
 
     /**

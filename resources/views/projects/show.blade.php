@@ -27,16 +27,29 @@
             @foreach ($tasks as $task)
                 <tr>
                     <td>
+                        @can('delete', $task)
+                            <form action="{{ route('projects.tasks.destroy', [$project, $task]) }}" method="POST"
+                                onsubmit="return confirm('Are you sure you want to delete this task?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger" style="margin-top: 1em">Delete</button>
+                            </form>
+                        @endcan
+                        @can('update', $task)
+                            <a href="{{ route('projects.tasks.edit', [$project, $task]) }}" class="btn btn-primary">Edit</a>
+                        @endcan
                         {{ $task->title }}
                     </td>
                     <td>
                         {{ $task->deadline }}
                     </td>
                     <td>
-                        {{ $task->status_id }}
+                        {{ $task->taskStatus->status }}
                     </td>
                     <td>
-                        {{ $task->responsible_person }}
+                        @if ($task->user !== null)
+                        {{ $task->user->username }}
+                        @endif
                     </td>
                 </tr>
             @endforeach
@@ -50,7 +63,7 @@
     </table>
 
     @can('create', [App\Models\Task::class, $project])
-        <a href="{{ route('tasks.create') }}" class="btn btn-primary">Add Task</a>
+        <a href="{{ route('projects.tasks.create', $project) }}" class="btn btn-primary">Add Task</a>
     @endcan
 
     @can('update', $project)
