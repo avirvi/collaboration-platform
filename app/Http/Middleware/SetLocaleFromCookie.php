@@ -17,9 +17,9 @@ class SetLocaleFromCookie
     public function handle(Request $request, Closure $next): Response
     {
         $locale = $request->cookie('language', config('app.locale'));
-        // if (!in_array($locale, ['en', 'lv'])) {
-        //     $locale = config('app.locale'); // fallback
-        // }
+        if (!in_array($locale, ['en', 'lv'])) {
+            $locale = config('app.locale'); // fallback
+        }
         App::setLocale($locale);
         return $next($request);
     }
